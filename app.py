@@ -14,12 +14,12 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 @app.route("/", methods=['GET'])
 def home():
     if 'invoice' in session.keys():
-        return render_template('home.html', invoice="Invoice creation success " + session['invoice'])
+        return render_template('home.html', invoice=session['invoice'])
     else:
         return render_template('home.html')
 @app.route("/payment")
 def payment_home():
-    session['invoice'] = ''
+    session.clear()
     return render_template("payment_home.html",key=PUBLIC_KEY)
 
 @app.route("/makePayment",methods=["POST"])
@@ -52,7 +52,7 @@ def paymentSuccess():
 
 @app.route('/invoice', methods=['GET'])
 def invoice_home():
-    session['invoice'] = ''
+    session.clear()
     return render_template("invoice.html", key=PUBLIC_KEY)
 
 @app.route('/makeInvoice', methods=['POST'])
