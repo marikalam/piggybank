@@ -2,17 +2,11 @@
 
 ## Objective: To create an adaptive cashflow forecasting tool for small business to better manage working capital
 
+1. Cashflow projection (Worst case scenario): Customers pay at the last possible due date
+
+  - Cashflow is projected based on the final invoice due date
+  - Users can see projection by day, week, month
+
+    Beginning balance + cashflow over time period = ending balance
 
 
-Cashflow projection by day, week, month
-
-Beginning balance + cashflow = ending balance
-
-Most conservative Case:
-Invoice Due Date
-Invoice Amount
-Invoice Origination Date
-
-Update from USAA:
-Check balance, vendor name
-Update cashflow
