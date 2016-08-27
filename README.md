@@ -12,7 +12,8 @@ Beginning balance + cashflow over time period = ending balance
 2. Cashflow projection (updated real time based on bank cashflows)
 
   - Calls are made to USBank to check if an invoices are paid ahead of due date
-  - Cashflow calculation are updated based on bank inflows
+      - Transactions are matched based on amount and description 
+  - Cashflow calculations are updated based on confirmation of invoice payment
   
 
 
