@@ -1,0 +1,14 @@
+.cont{
+  margin-top:10%;
+  text-align: center;
+}
+
+.line{
+  margin-top:8px;
+}
+
+label{
+  display: inline-block;
+  text-align: left;
+  width: 7%;
+}
