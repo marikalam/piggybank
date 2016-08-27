@@ -20,14 +20,14 @@ def home():
 @app.route("/payment")
 def payment_home():
     session.clear()
-    return render_template("payment_home.html",key=PUBLIC_KEY)
+    return render_template("payment.html",key=PUBLIC_KEY)
 
 @app.route("/makePayment",methods=["POST"])
 def payment():
-    token =  request.form["simplifyToken"]
 
     simplify.public_key = PUBLIC_KEY
     simplify.private_key = PRIVATE_KEY
+
     payment = simplify.Payment.create({
         "token" : token,
         "amount" : "1000",
@@ -39,6 +39,10 @@ def payment():
     session["id"] = payment.authCode
     session["amount"] = payment.amount
 
+    print session['id']
+    print session['amount']
+    print token
+
     if payment.paymentStatus == 'APPROVED':
         return redirect(url_for("paymentSuccess"))
     else:
@@ -47,7 +51,7 @@ def payment():
 @app.route("/paymentsuccess")
 def paymentSuccess():
     amount = session["amount"]/100
-    return render_template("payment.html",amount=amount,id=session["id"])
+    return render_template("payment_success.html",amount=amount,id=session["id"])
 
 
 @app.route('/invoice', methods=['GET'])
