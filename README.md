@@ -13,8 +13,9 @@ Beginning balance + cashflow over time period = ending balance
 
   - Calls are made to USBank to check if an invoices are paid ahead of due date
       - Transactions are matched based on amount and description 
-  - Cashflow calculations are updated based on confirmation of invoice payment
+      - Cashflow calculations are updated based on confirmation of invoice payment
   - Calls are made to USBank to check if an invoices are late
+      - Cashflow calculations are updated
   
 
 
