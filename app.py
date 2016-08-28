@@ -18,14 +18,14 @@ def home():
     # If you're not logged in, go back to login page
     if 'username' not in session.keys() or session['username'] == '':
         return render_template('login.html')
-
-    if 'invoice' in session.keys():
-        if session['invoice'] == '':
-            return render_template('home.html')
+    else: # If you are logged in 
+        if 'invoice' in session.keys():
+            if session['invoice'] == '':
+                return render_template('home.html', user=session['username'])
+            else:
+                return render_template('home.html', invoice=session['invoice'], user=session['username'])
         else:
-            return render_template('home.html', invoice=session['invoice'])
-    else:
-        return render_template('home.html')
+            return render_template('home.html', user=session['username'])
 
 @app.route('/something.svg')
 def graph_something():
@@ -42,7 +42,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         session['username'] = username
-        return redirect(url_for("home"))
+        return render_template('home.html', user=session['username'])
     else:
         return render_template('login.html')
 
@@ -58,7 +58,7 @@ def payment_home():
     if 'username' not in session.keys() or session['username'] == '':
         return render_template('login.html')
     session['invoice'] = ''
-    return render_template("payment.html",key=PUBLIC_KEY)
+    return render_template("payment.html",key=PUBLIC_KEY, user=session['username'])
 
 @app.route("/makePayment",methods=["POST"])
 def payment():
@@ -97,7 +97,7 @@ def invoice_home():
     if 'username' not in session.keys() or session['username'] == '':
         return render_template('login.html')
     session['invoice'] = ''
-    return render_template("invoice.html", key=PUBLIC_KEY)
+    return render_template("invoice.html", key=PUBLIC_KEY, user=session['username'])
 
 @app.route('/makeInvoice', methods=['POST'])
 def invoice():
@@ -130,7 +130,7 @@ def invoice():
  
     print invoice
     session['invoice'] = invoice.id
-    return redirect(url_for('home'))
+    return render_template("home.html", user=session['username'])
 
 
 if __name__=="__main__":
