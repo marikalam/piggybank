@@ -1,6 +1,11 @@
+#left, #right { 
+    margin-bottom: 90px; 
+}
+
 .cont{
   margin-top:10%;
   text-align: center;
+  padding-bottom: 300px;
 }
 
 .line{
