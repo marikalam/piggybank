@@ -91,6 +91,11 @@ def paymentSuccess():
     amount = session["amount"]/100
     return render_template("payment_success.html",amount=amount,id=session["id"])
 
+@app.route('/loans', methods=['GET'])
+def loans():
+
+    return render_template("loans.html")
+
 
 @app.route('/invoice', methods=['GET'])
 def invoice_home():
