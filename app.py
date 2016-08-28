@@ -5,13 +5,11 @@ from datetime import datetime, time
 import time
 import datetime
 import json
-import pandas as pd
-import pygal
-
 
 app = Flask(__name__)
 app.debug = True
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
 
 @app.route("/", methods=['GET'])
 def home():
@@ -85,6 +83,7 @@ def payment():
         return redirect(url_for("paymentSuccess"))
     else:
         return "Payment not approved"
+
 
 @app.route("/paymentsuccess")
 def paymentSuccess():
