@@ -6,6 +6,8 @@ import time
 import datetime
 import json
 import pandas as pd
+import pygal
+
 
 app = Flask(__name__)
 app.debug = True
@@ -24,6 +26,15 @@ def home():
             return render_template('home.html', invoice=session['invoice'])
     else:
         return render_template('home.html')
+
+@app.route('/something.svg')
+def graph_something():
+    bar_chart = pygal.Line()
+    bar_chart.x_labels = '8/27', '8/28', '8/29', '8/30', '8/31', '9/1' #day, week, month
+    #bar_chart.y_labels #dollars (today: start with US bank balance)
+    bar_chart.add('Balance', [0, 8999, 7111, 40000, 50000, 25000]) #invoice payment+balance
+    return bar_chart.render_response()
+
 
 @app.route("/login", methods=['GET','POST'])
 def login():
