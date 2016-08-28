@@ -96,6 +96,10 @@ def loans():
 
     return render_template("loans.html")
 
+@app.route("/invoiceReview")
+def invoice_summary():
+    return render_template("invoice_review.html")
+
 
 @app.route('/invoice', methods=['GET'])
 def invoice_home():
