@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <title>4Sight</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style="background-image:url(../static/open.png); background-repeat: no-repeat; background-size:cover;">
+
+<div class="container">
+	<img src="../static/LogoBlack.png" style="width:164px;">
+	<div class="login" style="background-color:white; width: 400px; height: 450px; border-radius: 25px; outline: black thick; float:right; margin-right:100px; margin-top:90px;">
+
+		<form id="simplify-payment-form" action="/login" method="POST" style="padding-top:30px; padding-left:25px; padding-right:25px;">
+			<h1 style="margin-left:30px;"> Welcome Back! </h1>
+			<hr>
+			<br>
+			<div class="form-group" style="margin-left:20px; margin-right:20px;">
+		        <input type="text" maxlength="30" class="form-control" autocomplete="off" style="border-radius:25px;" placeholder="Username" name="username"/>
+		    </div>
+		    <br>
+		    <div class="form-group" style="margin-left:20px; margin-right:20px;">
+		        <input for="password" type="password" maxlength="30" class="form-control" autocomplete="off" style="border-radius:25px; " placeholder="Password" name="password" />
+		    </div>
+		    <br>
+		    <button id="process-payment-btn" type="submit" class="btn btn-primary" style="border-radius:25px; width:308px; margin-left:24px;">Login</button>
+		    <br>
+		    <br>
+
+		    <hr>
+		    <i style="display:inline-block; color:grey;">Not a 4Sight user?</i>
+		     <button id="process-payment-btn" type="submit" class="btn btn-default" style="border-radius:25px; width:200px; display:inline-block; margin-left:15px;">Join Us</button>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>
