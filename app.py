@@ -19,6 +19,9 @@ def home():
     if 'username' not in session.keys() or session['username'] == '':
         return render_template('login.html')
     else: # If you are logged in 
+        with open('invoices.json') as data_file:    
+            data = json.load(data_file)
+            
         if 'invoice' in session.keys():
             if session['invoice'] == '':
                 return render_template('home.html', user=session['username'])
@@ -41,8 +44,14 @@ def login():
     if(request.method == 'POST'):
         username = request.form['username']
         password = request.form['password']
-        session['username'] = username
-        return render_template('home.html', user=session['username'])
+
+        with open('users.json') as data_file:    
+            data = json.load(data_file)
+        for user in data['users']:
+            if user['username'] == username and user['password'] == password:
+                session['username'] = username
+                return render_template('home.html', user=session['username'])
+        return render_template('login.html')  
     else:
         return render_template('login.html')
 
@@ -134,6 +143,31 @@ def invoice():
     }) 
  
     print invoice
+
+    invoice_json = {
+        "customer": {
+            "email": invoice['customer']['email'],
+            "id": invoice['customer']['id'],
+            "name": invoice['customer']['name']
+        },
+        "dateCreated": invoice['dateCreated'],
+        "dueDate": invoice['dueDate'],
+        "invoiceID": invoice['invoiceId'],
+        "memo": invoice['memo'],
+        "items": {
+            "amount": invoice['items'][0]['amount']
+        }
+    }
+
+
+    with open('invoices.json') as data_file:    
+            data = json.load(data_file)
+
+    data['invoices'].append(invoice_json)
+
+    with open('invoices.json', 'w') as f:
+        json.dump(data, f)
+
     session['invoice'] = invoice.id
     return render_template("home.html", user=session['username'])
 
