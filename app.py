@@ -208,6 +208,10 @@ def invoice():
     session['invoice'] = invoice.id
     return render_template("home.html", user=session['username'])
 
+@app.route("/invoiceReview")
+def invoice_summary():
+    return render_template("invoice_review.html")
+
 
 if __name__=="__main__":
     app.run("0.0.0.0",5000)

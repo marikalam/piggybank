@@ -28,7 +28,12 @@
             </ul>
          </div>
       </nav>
+<<<<<<< HEAD
+      <h1>4Sight Dashboard</h1><br><br>
+=======
       <h1>Dashboard</h1><br><br>
+      {{invoice}}
+>>>>>>> e8b2813a36d59f90f77e0b6819b9ae8b06673e5d
       <div class="wrapper">
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -141,6 +146,7 @@ e.exports=function(t,e,r,o){function a(t,e){g.push(t._hovertitle+": "+i.tickText
             </div>
             <!-- /.col -->
          </div>
+<<<<<<< HEAD
          <!-- /.row -->
          <!-- TABLE: LATEST ORDERS -->
          <div class="box box-info"><br><br>
@@ -189,5 +195,9 @@ e.exports=function(t,e,r,o){function a(t,e){g.push(t._hovertitle+": "+i.tickText
             <!-- /.box-footer -->
          </div>
       </div>
+=======
+         <!-- /.row --> 
+      </div><br><br><br>
+>>>>>>> e8b2813a36d59f90f77e0b6819b9ae8b06673e5d
    </body>
 </html>
