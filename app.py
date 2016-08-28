@@ -13,13 +13,40 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 @app.route("/", methods=['GET'])
 def home():
+    # If you're not logged in, go back to login page
+    if 'username' not in session.keys() or session['username'] == '':
+        return render_template('login.html')
+
     if 'invoice' in session.keys():
-        return render_template('home.html', invoice=session['invoice'])
+        if session['invoice'] == '':
+            return render_template('home.html')
+        else:
+            return render_template('home.html', invoice=session['invoice'])
     else:
         return render_template('home.html')
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+    if(request.method == 'POST'):
+        username = request.form['username']
+        password = request.form['password']
+        session['username'] = username
+        return redirect(url_for("home"))
+    else:
+        return render_template('login.html')
+
+@app.route("/logout", methods=['GET'])
+def logout():
+    session['username'] = ''
+    return render_template('login.html')
+
+
 @app.route("/payment")
 def payment_home():
-    session.clear()
+    # If you're not logged in, go back to login page
+    if 'username' not in session.keys() or session['username'] == '':
+        return render_template('login.html')
+    session['invoice'] = ''
     return render_template("payment.html",key=PUBLIC_KEY)
 
 @app.route("/makePayment",methods=["POST"])
@@ -56,7 +83,9 @@ def paymentSuccess():
 
 @app.route('/invoice', methods=['GET'])
 def invoice_home():
-    session.clear()
+    if 'username' not in session.keys() or session['username'] == '':
+        return render_template('login.html')
+    session['invoice'] = ''
     return render_template("invoice.html", key=PUBLIC_KEY)
 
 @app.route('/makeInvoice', methods=['POST'])
