@@ -9,8 +9,9 @@
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="myApp" ng-controller="myCtrl">
 
 <div class="container">
   <nav class="navbar navbar-default">
@@ -20,8 +21,8 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
-        <li><a href="/invoiceReview">Invoice</a></li>
         <li><a href="/loans">Loans</a></li>
+        <li><a href="/invoice">Make Invoice</a></li>
         <li><a href="/logout">Logout</a></li>
         {% if user %}
         <li style="margin-left:380px; margin-top:15px;">Hello, {{user}}! </li>
@@ -29,48 +30,65 @@
       </ul>
     </div>
   </nav>
-    <h1>Make a Payment</h1>
+    <h1>Loan</h1>
     <hr/>
-    <form id="simplify-payment-form" action="/makePayment" method="POST" style="width:50%">
-    <div class="form-group">
-        <label>Credit Card Number: </label>
-        <input id="cc-number" type="text" maxlength="20" class="form-control" autocomplete="off" value="" autofocus />
+    <div class="box-body">
+       <div class="table-responsive">
+          <table class="table no-margin">
+             <thead>
+                <tr>
+                   <th>Recurring Vendor</th>
+                   <th>Account Recievable</th>
+                   <th>Risk Status</th>
+                   <th>Haircut</th>
+                   <th>Loan</th>
+                </tr>
+             </thead>
+             <tbody>
+              {% for loan in loans %}
+                <tr>
+                   <td><a href="pages/examples/invoice.html">{{loan.Vendor}}</a></td>
+                   <td>${{ loan.AccountRecievable}}</td>
+                   <td>{{ loan.Score}} </td>
+                   <td>{{ loan.Haircut }}%</td>
+                   <td>${{ loan.Loan }}</td>
+                </tr>
+              {%endfor %}
+              <tr>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td>Total Potential Loan </td>
+              <td> ${{total}}</td>
+              </tr>
+
+             </tbody>
+          </table>
+       </div>
+       <!-- /.table-responsive -->
     </div>
-    <div class="form-group">
-        <label>CVC: </label>
-        <input id="cc-cvc" type="text" maxlength="4" class="form-control" autocomplete="off" value="" style="width:15%"/>
-    </div>
-    <div class="form-group">
-        <label>Expiry Date: </label>
-        <select id="cc-exp-month">
-            <option value="01">Jan</option>
-            <option value="02">Feb</option>
-            <option value="03">Mar</option>
-            <option value="04">Apr</option>
-            <option value="05">May</option>
-            <option value="06">Jun</option>
-            <option value="07">Jul</option>
-            <option value="08">Aug</option>
-            <option value="09">Sep</option>
-            <option value="10">Oct</option>
-            <option value="11">Nov</option>
-            <option value="12">Dec</option>
-        </select>
-        <select id="cc-exp-year">
-            <option value="13">2013</option>
-            <option value="14">2014</option>
-            <option value="15">2015</option>
-            <option value="16">2016</option>
-            <option value="17">2017</option>
-            <option value="18">2018</option>
-            <option value="19">2019</option>
-            <option value="20">2020</option>
-            <option value="21">2021</option>
-            <option value="22">2022</option>
-        </select>
-    </div>
-    <button id="process-payment-btn" type="submit" class="btn btn-default">Process Payment</button>
-</form>
+    <br>
+    <form id="simplify-payment-form" action="/make_loan" method="POST" style="width:50%">
+            <h2> Business Loan </h2>
+            <div class="form-group" ng-app="" >
+                <label for="email">Amount Borrow:</label>
+                <!--<span>$</span><input type="number" style="border-radius:5px; height:33px;" min="0.01" step="0.01" max="2500" value="0.00" name="amount" ng-model="amount">-->
+                <input type="text" ng-model="amount">
+                of ${{total}}
+            </div>
+            <div class="form-group" ng-app="" > 
+              <label for="email">Interest Rate:</label><p ng-bind="amount/{{total}}"></p>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+    <script>
+      var app = angular.module('myApp', []);
+      app.controller('myCtrl', function($scope) {
+          $scope.amount;
+          $scope.interest;
+      });
+    </script>
 </div>
 </body>
 </html>
