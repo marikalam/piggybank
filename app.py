@@ -75,7 +75,9 @@ def invoice():
  
 print invoice
 
-
+@app.route('/balance', methods=['GET'])
+def balance():
+    return render_template('balance.html')
 
 if __name__=="__main__":
     app.run("0.0.0.0",5000)
