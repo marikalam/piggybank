@@ -2,15 +2,24 @@
     "users": [
     {
         "username": "audrey",
-        "password": "audrey"
+        "password": "audrey",
+        "company": "Wellfie",
+        "phone": "650-303-2000",
+        "address": "400 Mission Blvd, San Francisco, CA, 94041"
     },
     {
         "username": "marika",
-        "password": "marika"
+        "password": "marika",
+        "company": "Rakutan",
+        "phone": "650-303-2000",
+        "address": "400 Winning Street, San Mateo, CA, 94041"
     },
     {
         "username": "howard",
-        "password": "howard"
+        "password": "howard",
+        "company": "Wellfie",
+        "phone": "650-303-2000",
+        "address": "400 Mission Blvd, San Francisco, CA, 94041"
     }
     ]
 }

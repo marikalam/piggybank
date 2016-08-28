@@ -31,6 +31,7 @@ def home():
         else:
             return render_template('home.html', user=session['username'], invoices=invoices)
 
+
 @app.route('/something.svg')
 def graph_something():
     bar_chart = pygal.Line()
@@ -112,7 +113,17 @@ def invoice_home():
     if 'username' not in session.keys() or session['username'] == '':
         return render_template('login.html')
     session['invoice'] = ''
-    return render_template("invoice.html", key=PUBLIC_KEY, user=session['username'])
+    company = ''
+    phone = ''
+    address = ''
+    with open('users.json') as data_file:    
+            data = json.load(data_file)
+            for user in data['users']:
+                if user['username'] == session['username']:
+                    company = user['company']
+                    phone = user['phone']
+                    address = user['address']
+    return render_template("invoice.html", key=PUBLIC_KEY, user=session['username'], company=company, phone=phone, address=address)
 
 @app.route('/makeInvoice', methods=['POST'])
 def invoice():
