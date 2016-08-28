@@ -104,8 +104,32 @@ def paymentSuccess():
 
 @app.route('/loans', methods=['GET'])
 def loans():
+    loans = []
+    vendors = {}
+    total = 0
+    with open('invoices.json') as data_file:    
+            data = json.load(data_file)
+            invoices = data['invoices']
+            for invoice in invoices:
+                if(invoice['customer']['name'] not in vendors.keys()):
+                    loans.append({
+                    "Vendor": invoice['customer']['name'],
+                    "AccountRecievable": invoice['amount'],
+                    "Score": "Low Risk",
+                    "Haircut": 20.0,
+                    "Loan": invoice['amount']*10.0*0.2
+                    })
+                    total += invoice['amount'] * 10 * 0.2
+                    vendors[invoice['customer']['name']] = True
+                else: 
+                    # loop through and find the vendor who needs their invoice calculated
+                    for loan in loans:
+                        if loan['Vendor'] == invoice['customer']['name']:
+                            loan['AccountRecievable'] += invoice['amount']
+                
+    print loans
 
-    return render_template("loans.html")
+    return render_template("loans.html", loans=loans, total=total)
 
 
 @app.route('/invoice', methods=['GET'])
@@ -130,6 +154,7 @@ def invoice():
     memo = request.form["memo"]
     email = request.form["email"]
     amount = request.form["amount"]
+    name = request.form["name"]
 
     dueDate = str(int(time.time()) + (24 * 60 * 60 * int(request.form["dueDate"])))
    
@@ -147,7 +172,7 @@ def invoice():
            }
         ],
         "email" : email,
-        "name" : session['username'],
+        "name" : name,
         "dateCreated" : dateCreated,
         "dueDate" : dueDate,
         "reference" : "Ref2",
@@ -167,7 +192,8 @@ def invoice():
         "invoiceID": invoice['invoiceId'],
         "memo": invoice['memo'],
         "amount": invoice['items'][0]['amount'],
-        "status": "Pending"
+        "status": "Pending",
+        "username": session['username']
     }
 
 
