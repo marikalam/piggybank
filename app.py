@@ -21,14 +21,15 @@ def home():
     else: # If you are logged in 
         with open('invoices.json') as data_file:    
             data = json.load(data_file)
-            
+            invoices = data['invoices']
+
         if 'invoice' in session.keys():
             if session['invoice'] == '':
-                return render_template('home.html', user=session['username'])
+                return render_template('home.html', user=session['username'], invoices=invoices)
             else:
-                return render_template('home.html', invoice=session['invoice'], user=session['username'])
+                return render_template('home.html', invoice=session['invoice'], user=session['username'], invoices=invoices)
         else:
-            return render_template('home.html', user=session['username'])
+            return render_template('home.html', user=session['username'], invoices=invoices)
 
 @app.route('/something.svg')
 def graph_something():
@@ -135,7 +136,7 @@ def invoice():
            }
         ],
         "email" : email,
-        "name" : "Customer",
+        "name" : session['username'],
         "dateCreated" : dateCreated,
         "dueDate" : dueDate,
         "reference" : "Ref2",
@@ -154,9 +155,8 @@ def invoice():
         "dueDate": invoice['dueDate'],
         "invoiceID": invoice['invoiceId'],
         "memo": invoice['memo'],
-        "items": {
-            "amount": invoice['items'][0]['amount']
-        }
+        "amount": invoice['items'][0]['amount'],
+        "status": "Pending"
     }
 
 

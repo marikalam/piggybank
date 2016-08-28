@@ -28,7 +28,6 @@
          </div>
       </nav>
       <h1>4Sight Dashboard</h1><br><br>
-      {{invoice}}
       <div class="wrapper">
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -206,62 +205,24 @@
                         </tr>
                      </thead>
                      <tbody>
+                      {% for invoice in invoices %}
                         <tr>
-                           <td><a href="pages/examples/invoice.html">9842</a></td>
-                           <td>Google</td>
-                           <td><span class="label label-success">Paid</span></td>
+                           <td><a href="pages/examples/invoice.html">{{invoice.invoiceID}}</a></td>
+                           <td>{{ invoice.customer.name}}</td>
+                           {%if invoice.status == 'Paid'%}
+                           <td><span class="label label-success">{{ invoice.status}}</span></td>
+                           {%elif invoice.status == 'Pending'%}
+                           <td><span class="label label-warning">{{ invoice.status}}</span></td>
+                           {%elif invoice.status == 'Processing' %}
+                           <td><span class="label label-info">{{ invoice.status}}</span></td>
+                           {%else %}
+                           <td><span class="label label-danger">{{ invoice.status}}</span></td>
+                           {%endif %}
                            <td>
-                              <div class="sparkbar" data-color="#00a65a" data-height="20">$900</div>
+                              <div class="sparkbar" data-color="#00a65a" data-height="20">${{invoice.amount}}</div>
                            </td>
                         </tr>
-                        <tr>
-                           <td><a href="pages/examples/invoice.html">1848</a></td>
-                           <td>Google</td>
-                           <td><span class="label label-warning">Pending</span></td>
-                           <td>
-                              <div class="sparkbar" data-color="#f39c12" data-height="20">$800</div>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td><a href="pages/examples/invoice.html">7429</a></td>
-                           <td>Welfie</td>
-                           <td><span class="label label-success">Paid</span></td>
-                           <td>
-                              <div class="sparkbar" data-color="#f56954" data-height="20">$900</div>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td><a href="pages/examples/invoice.html">7429</a></td>
-                           <td>Rakuten</td>
-                           <td><span class="label label-info">Processing</span></td>
-                           <td>
-                              <div class="sparkbar" data-color="#00c0ef" data-height="20">$800</div>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td><a href="pages/examples/invoice.html">1848</a></td>
-                           <td>Rakuten</td>
-                           <td><span class="label label-warning">Pending</span></td>
-                           <td>
-                              <div class="sparkbar" data-color="#f39c12" data-height="20">$500</div>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td><a href="pages/examples/invoice.html">7429</a></td>
-                           <td>Google</td>
-                           <td><span class="label label-success">Paid</span></td>
-                           <td>
-                              <div class="sparkbar" data-color="#f56954" data-height="20">$800</div>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td><a href="pages/examples/invoice.html">9842</a></td>
-                           <td>Welfie</td>
-                           <td><span class="label label-success">Paid</span></td>
-                           <td>
-                              <div class="sparkbar" data-color="#00a65a" data-height="20">$500</div>
-                           </td>
-                        </tr>
+                      {%endfor %}
                      </tbody>
                   </table>
                </div>

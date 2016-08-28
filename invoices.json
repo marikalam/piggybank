@@ -1,1 +1,51 @@
-{"invoices": [{"customer": {"id": "GaLBjoxx", "email": "audreycole88@gmail.com", "name": "Customer Customer"}, "invoiceID": "11", "items": {"amount": 100}, "memo": "Here is a memo!", "dateCreated": 1472404090099, "dueDate": 1473008927}, {"customer": {"email": "Marika@marika.com", "name": "Customer", "id": "5qB6ArGM"}, "invoiceID": "15", "items": {"amount": 10}, "memo": "blah", "dateCreated": 1472405219166, "dueDate": 1473010056}]}
+{
+    "invoices": [{
+        "customer": {
+            "email": "microsoft@microsoft.com",
+            "id": "GaLBjoxx",
+            "name": "Microsoft"
+        },
+        "status": "Paid",
+        "invoiceID": "11",
+        "amount":100,
+        "memo": "Here is a memo!",
+        "dateCreated": 1472404090099,
+        "dueDate": 1473008927
+    }, {
+        "customer": {
+            "id": "5qB6ArGM",
+            "name": "Customer",
+            "email": "marika@marika.com"
+        },
+        "status": "Pending",
+        "invoiceID": "15",
+        "amount":10,
+        "memo": "blah",
+        "dateCreated": 1472405219166,
+        "dueDate": 1473010056
+    }, {
+        "customer": {
+            "id": "qX88qpKK",
+            "email": "howie@howie.com",
+            "name": "Howard Chan"
+        },
+        "status": "Pending",
+        "invoiceID": "16",
+        "amount":50,
+        "memo": "Violin Lessons",
+        "dateCreated": 1472405822240,
+        "dueDate": 1477589859
+    }, {
+        "customer": {
+            "email": "donald@trump.com",
+            "name": "Donald Trump",
+            "id": "qX88qpKK"
+        },
+        "status": "Late",
+        "invoiceID": "17",
+        "amount":50,
+        "memo": "Trumpet Lessons",
+        "dateCreated": 1472406263079,
+        "dueDate": 1477590299
+    }]
+}
