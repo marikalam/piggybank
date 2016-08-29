@@ -45,4 +45,8 @@ Beginning balance + cashflow over time period = ending balance
 ![](https://github.com/marikaklee/piggybank/blob/master/images/4site-loan.png "Description goes here")
 
 
-
+<h1>How to run locally</h1>
+1. git clone [this repository]
+2. cd piggybank
+3. python app.py
+4. open website on localhost:5000
